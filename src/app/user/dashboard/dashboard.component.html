@@ -1,0 +1,52 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#81bb26" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<h3 class="ml-3 mr-3" >Dashboard</h3>
+
+<select class="custom-select dropdown selectStyle ml-3 mr-3" (change)="onChangeSelect($event.target.value)">
+    <option *ngFor="let box of boxes; let i = index" [value]="i">{{box.name}}
+    </option>
+</select>
+<br>
+<br>
+<div *ngFor="let sensorbox of sensorboxes" class="card d-inline-flex m-2 ml-3 mr-3 cardStyle">
+    <!-- <div class="card-body" (click)="goDetailSensor(sensorbox.sensorID, sensorbox.boxID, sensorbox.sensor.sensorType.name, sensorbox.sensor.sensorType.unit, sensorbox.timestamp)">
+        <div class="row justify-content-center">
+            <h5 class="card-title text-center">{{sensorbox.sensor.sensorType.name}}</h5>
+        </div>
+        <div class="row justify-content-center">
+            <p class="card-text">{{sensorbox.measurementValue}} {{sensorbox.sensor.sensorType.unit}}</p>
+        </div>
+        <div>
+            <p class="datumCard">
+                Tijdstip: {{sensorbox.timestamp | date:"short"}}
+            </p>
+        </div>
+    </div> -->
+
+    <div class="card-body"
+        (click)="goDetailSensor(sensorbox.sensorID, sensorbox.boxID, sensorbox.sensor.sensorType.name, sensorbox.sensor.sensorType.unit, sensorbox.timestamp)">
+
+        <h5 class="card-title center">{{sensorbox.sensor.sensorType.name}}</h5>
+
+        <p class="card-text center">{{sensorbox.measurementValue}} {{sensorbox.sensor.sensorType.unit}}</p>
+
+        <p class=" card-text datumCard center">
+            {{sensorbox.timestamp | date:"dd/MMM/yyyy HH:mm:ss" : '+0100'}}
+        </p>
+
+    </div>
+
+</div>
+
+<a class="btn btn-block mt-4 biotGreen"  (click)="goTerrascope(selectedBox.boxID)">Lookup Intelligent Data</a>
+
+<!-- <button class="btn btn-block mt-4 biotGreen" (click)="goMonitoring()">Monitoring bekijken voor deze box</button> -->
+
+<div *ngIf="urlMaps" class="row justify-content-center mt-5 mb-3 afgerond">
+    <iframe class="afgerond" width="600" height="450" frameborder="0" style="border:0"
+        [src]="urlMaps | safe: 'resourceUrl'" allowfullscreen>
+    </iframe>
+
+</div>

@@ -1,0 +1,63 @@
+<div *ngIf="addBoxStart">
+
+  <h3>Add new box</h3>
+
+
+  {{selectedUser | json}}
+  <form #boxform="ngForm">
+    <div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control input" required name="name" [(ngModel)]="box.name">
+      </div>
+      <div class="form-group">
+        <label for="macAddress">Mac address</label>
+        <input type="text" class="form-control input" required name="macAddress" [(ngModel)]="box.macAddress">
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea type="text" class="form-control input" required name="comment" [(ngModel)]="box.comment"></textarea>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-block mt-4 biotGreen" [disabled]="!boxform.form.valid" (click)="addBox()">Add</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="addSensor">
+  <h3>Add sensors</h3>
+  <h5>You can skip this step and add sensors later. Just press the add button without selecting a sensor.</h5>
+  <form #sensorADDform="ngForm">
+    <div>
+      <div *ngFor="let sensor of sensors | async">
+        <label>
+          <input type="checkbox" value="sensor" (change)="onCheckboxChange(sensor,$event)"> {{sensor.name}}</label>
+      </div>
+    </div>
+    <button class="btn btn-block mt-4 biotGreen" [disabled]="!sensorADDform.form.valid"
+      (click)="addSensorBox()">Add</button>
+
+  </form>
+</div>
+
+<div *ngIf="addUser">
+<h3>Add User</h3>
+<h5>You can skip this step and add a user later.</h5>
+
+<form #userADDform="ngForm">
+  <div class="form-group" *ngIf="(gebruikers | async)">
+    <label for="select">Owner</label><br>
+    <select class="custom-select dropdown" [(ngModel)]="selectedUser" style="width: 100%;" name="select">
+      <option *ngFor="let user of gebruikers | async" [value]="user.userID">{{user.firstName}} {{user.lastName}}
+      </option>
+    </select>
+  </div>
+  <button class="btn btn-block mt-4 biotGreen" [disabled]="!userADDform.form.valid"
+    (click)="addUserBox()">Finish</button>
+
+</form>
+
+</div>

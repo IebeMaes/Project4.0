@@ -1,0 +1,30 @@
+<!-- <p>chart</p> -->
+<!-- <button (click)="testTest()">test</button> -->
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#81bb26" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<div style="text-align: center;"><img src="../../../assets/LogoVito.png" style="height:40px;" alt="">
+
+<h4 class="pt-2"> FAPAR for your location</h4>
+</div>
+<div id="container2" style="width: 95%;" class="mb-1">
+</div>
+
+<div class="mb-5" style="text-align: right;">
+  <!-- keuze uit grafiekweergave -->
+  <label for="SelectGraphType">
+    <fa-icon [icon]="faEye" class="closingX" size="1x"></fa-icon>&nbsp;
+  </label>
+  <select class="custom-select dropdown col-3" [(ngModel)]="selectedGraphType"
+    (change)="changeGraphType()" id="SelectGraphType">
+    <option *ngFor="let type of graphTypes" [ngValue]=type>{{
+      type | titlecase}}
+      <!-- wilt niet lukken: icon in dropdown!! -->
+      <!-- <fa-icon *ngIf="type==='scatter'" [icon]="faEye" class="closingX" size="1x">i</fa-icon> -->
+      <span *ngIf="type==='scatter'"></span>
+      <span *ngIf="type==='line'"></span>
+      <span *ngIf="type==='bar'"></span>
+    </option>
+  </select>
+</div>

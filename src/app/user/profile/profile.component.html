@@ -1,0 +1,55 @@
+<div class="ml-3 mr-3">
+    <h3>Profile</h3>
+    <div class="row">
+        <div class="col-12">
+            <form #profileform="ngForm">
+                <div *ngIf="disable" class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control input" required [disabled]="disable" name="name" [(ngModel)]="fullname">
+                </div>
+               <div *ngIf="!disable">
+                    <div  class="form-group">
+                        <label for="firstName">Firstname</label>
+                        <input type="text" class="form-control input" required [disabled]="disable" name="firstName" [(ngModel)]="user.firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Lastname</label>
+                        <input type="text" class="form-control input" required [disabled]="disable" name="lastName" [(ngModel)]="user.lastName">
+                    </div>
+               </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control input" required [disabled]="disable" name="email" email="true"
+                        [(ngModel)]="user.email">
+                </div>
+                <div *ngIf="!disable">
+                    <a *ngIf="!changepw" class="linkStyle" [routerLink]="" (click)="changePassword()">Wachtwoord wijzigen</a>
+                </div>
+                <div *ngIf="!disable">
+                    <div *ngIf="changepw">
+                        <div class="form-group">
+                            <label for="pw1">Password</label>
+                            <input type="password" class="form-control input" [class.inputwrong]="!samepw" name="pw1" minlength="6"
+                                [(ngModel)]="pw1" (input)="checkpw()">
+                        </div>
+                        <div class="form-group">
+                            <label for="pw2">Repeat password</label>
+                            <input type="password" class="form-control input" [class.inputwrong]="!samepw" name="pw2"
+                                [(ngModel)]="pw2" (input)="checkpw()">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="disable">
+                    <button class="btn btn-block mt-4 biotGreen" (click)="edit()">Edit</button>
+                </div>
+                <div *ngIf="!disable">
+                    <!-- <button type="submit" *ngIf="!changepw" class="btn btn-block mt-4 biotGreen" (click)="update()"[disabled]="!profileform.form.valid ">Update</button> -->
+                    <button type="submit" class="btn btn-block mt-4 biotGreen" [disabled]="!samepw || !profileform.form.valid" (click)="update()">Update</button>
+    
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+

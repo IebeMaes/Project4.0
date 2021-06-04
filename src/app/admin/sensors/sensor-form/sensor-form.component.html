@@ -1,0 +1,49 @@
+<div *ngIf="!newSensorType">
+    <h3 *ngIf="newSensor">Add new sensor</h3>
+    <h3 *ngIf="!newSensor">Edit sensor</h3>
+</div>
+<div *ngIf="newSensorType">
+    <h3>Add new sensortype</h3>
+</div>
+
+<form #sensorform="ngForm" *ngIf="!newSensorType">
+    <div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control input" required name="name" [(ngModel)]="sensor.name">
+        </div>
+    </div>
+    <div class="form-group" *ngIf="(sensorTypes | async)">
+        <label for="select">Sensortype</label><br>
+        <select class="custom-select dropdown" [(ngModel)]="sensor.sensorTypeID" style="width: 100%;" name="select">
+            <option *ngFor="let sensorType of sensorTypes | async" [value]="sensorType.sensorTypeID">{{sensorType.name}}
+                -- {{sensorType.unit}}
+            </option>
+        </select>
+    </div>
+    <div class="form-text linkStyle" (click)="addSensorTypeB()">Add a new sensortype</div>
+    <div *ngIf="newSensor">
+        <button class="btn btn-block mt-4 biotGreen" [disabled]="!sensorform.form.valid"
+            (click)="addSensor()">Add</button>
+    </div>
+    <div *ngIf="!newSensor">
+        <button class="btn btn-block mt-4 biotGreen" [disabled]="!sensorform.form.valid"
+            (click)="editSensor()">Update</button>
+
+    </div>
+</form>
+
+<form #sensorTypeform="ngForm" *ngIf="newSensorType">
+    <div>
+        <div class="form-group">
+            <label for="sensorTypeName">Name</label>
+            <input type="text" class="form-control input" required name="sensorTypeName" [(ngModel)]="sensorType.name">
+        </div>
+        <div class="form-group">
+            <label for="sensorTypeUnit">Unit</label>
+            <input type="text" class="form-control input" required name="sensorTypeUnit" [(ngModel)]="sensorType.unit">
+        </div>
+    </div>
+    <button class="btn btn-block mt-4 biotGreen" [disabled]="!sensorTypeform.form.valid" (click)="addSensorType()">Add</button>
+
+</form>

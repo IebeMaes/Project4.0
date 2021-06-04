@@ -1,0 +1,31 @@
+<div class="pt-5">
+    <div class="text-center m-4">
+        <img src="../../../assets/Logo.png" alt="logo" class="img-fluid">
+    </div>
+
+    <!-- <h1 class="text-center">Welkom!</h1>
+    <p class="text-center">Login om uw meetgegevens te bekijken.</p> -->
+
+
+
+    <!-- {{userLogin | json}} -->
+    <div class="ml-3 mr-3">
+        <h3 class="pt-3 pb-2">Login</h3>
+        <div class="row">
+            <div class="col-12">
+                <form #userLoginform="ngForm" (ngSubmit)="onSubmit()">
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control input" required name="email" [(ngModel)]="userLogin.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control input" required name="password" [(ngModel)]="userLogin.password">
+                    </div>
+                    <button type="submit" class="btn btn-block mt-4 biotGreen" [disabled]="!userLoginform.form.valid ">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

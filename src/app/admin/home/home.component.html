@@ -1,0 +1,25 @@
+<h3>Admin homepage</h3>
+<div class="row row-cols-auto pt-2">
+    <div class="col m-1">
+        <div class="card bg-transparent child" style="width: 100%; border: black 5px solid" (click)="goUsers()">
+            <fa-icon [icon]="faUserCog" size="3x" class="text-center pt-2 biotGreen"></fa-icon>
+            <div class="text-center child">Users</div>
+        </div>
+    </div>
+</div>
+<div class="row row-cols-auto pt-2">
+    <div class="col m-1 ">
+        <div class="card bg-transparent child" style="width: 100%; border: black 5px solid" (click)="goBoxes()">
+            <fa-icon [icon]="faBox" size="3x" class="text-center pt-2 biotGreen"></fa-icon>
+            <div class="text-center child">Boxes</div>
+        </div>
+    </div>
+</div>
+<div class="row row-cols-auto pt-2">
+    <div class="col m-1 ">
+        <div class="card bg-transparent child" style="width: 100%; border: black 5px solid" (click)="goSensors()">
+            <fa-icon [icon]="faTemperatureHigh" size="3x" class="text-center pt-2 biotGreen"></fa-icon>
+            <div class="text-center child">Sensors</div>
+        </div>
+    </div>
+</div>

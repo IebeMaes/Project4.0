@@ -1,0 +1,29 @@
+.input {
+  padding: 8px;
+  display: block;
+  border: none;
+  outline: none;
+  border-radius: 0%;
+  border-bottom: 1px solid #156a26;
+  width: 100%;
+}
+
+.inputwrong {
+  padding: 8px;
+  display: block;
+  border: none;
+  outline: none;
+  border-radius: 0%;
+  border-bottom: 1px solid red;
+  width: 100%;
+}
+
+.linkStyle {
+  color: #0645AD;
+  cursor: pointer;
+}
+
+.afgerond{
+  border-radius: 10%;
+  border:  3px solid #156a26;
+}

@@ -1,0 +1,73 @@
+<h3 *ngIf="newUser">Add new user</h3>
+<h3 *ngIf="!newUser">Edit user</h3>
+
+<form #profileform="ngForm">
+    <div>
+        <div class="form-group">
+            <label for="firstName">Firstname</label>
+            <input type="text" class="form-control input" required name="firstName"
+                [(ngModel)]="user.firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Lastname</label>
+            <input type="text" class="form-control input" required name="lastName"
+                [(ngModel)]="user.lastName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control input" required name="email" email="true"
+            [(ngModel)]="user.email">
+    </div>
+
+    <div *ngIf="newUser" class="form-group">
+        <label for="pw1">Password</label>
+        <input type="text" class="form-control input" name="password" minlength="6"
+            [(ngModel)]="user.password">
+        <div class="form-text linkStyle" (click)="generatePw()">Password can be generated automatically, click here</div>
+    </div>
+    <div class="form-group">
+        <label for="text">Address + house number </label>
+        <input type="address" class="form-control input" required name="address"
+            [(ngModel)]="user.address">
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="postalcode">PostalCode</label>
+                <input type="text" class="form-control input" required name="postalcode"
+                    [(ngModel)]="user.postalCode">
+            </div>
+            <div class="col">
+                <label for="city">City</label>
+                <input type="text" class="form-control input" required name="city"
+                    [(ngModel)]="user.city">
+            </div>
+        </div>
+        
+    </div>
+    <div class="form-group" *ngIf="(userTypes | async)">
+        <label for="">UserType</label> <br>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="tagID" [(ngModel)]="user.userTypeID">
+            <label ngbButtonLabel class="btn-primary" *ngFor="let userType of (userTypes |async)">
+                <input ngbButton type="radio" [value]="userType.userTypeID"> {{userType.userTypeName}}
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a style="color: red;" href="mailto:{{user.email}}?subject='Credentials sensorUnit'&body=Thank you for ordering a sensorunit from Vito. Below you will find your credentials. 
+            %0D%0A %0D%0A Email: {{user.email}} %0D%0A %0D%0A Password: {{user.password}} %0D%0A %0D%0A With these credentials you can log in on the platform. You can change your password under the profile section.">
+                Remember to share the credentials with the user. Click here
+                <fa-icon [icon]="faShareSquare" size="1x" class="text-center pt-2"></fa-icon>
+            </a>
+        </div>
+    </div>
+    <div *ngIf="newUser">
+        <button class="btn btn-block mt-4 biotGreen" [disabled]="!samepw || !profileform.form.valid" (click)="addUser()">Add</button>
+    </div>
+    <div *ngIf="!newUser">
+        <button class="btn btn-block mt-4 biotGreen" [disabled]="!samepw || !profileform.form.valid" (click)="editUser()">Update</button>
+
+    </div>
+</form>

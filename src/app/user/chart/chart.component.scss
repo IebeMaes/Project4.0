@@ -1,0 +1,47 @@
+.table {
+    width: 80%;
+    text-align: center;
+}
+
+span {
+    text-align: left;
+}
+
+button{
+padding: auto;
+}
+
+.btn{
+background-color:#156A26 ;
+}
+
+
+.closingX {
+    color: #156A26 ;
+}
+
+.highcharts-credits {
+    display:none!important;
+}
+
+.highcharts-legend{
+    margin-top: 300px!important;
+}
+
+
+
+@font-face {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style : normal;
+    src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot");
+    src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot") format("embedded-opentype"),
+         url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2") format("woff2"),
+         url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff") format("woff"),
+         url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf") format("truetype"),
+         url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg") format("svg");
+}
+select {
+    font-family: FontAwesome;
+    color:#81bb26;
+}

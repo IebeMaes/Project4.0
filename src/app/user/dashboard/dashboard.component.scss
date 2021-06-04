@@ -1,0 +1,45 @@
+@import '~breakpoint-sass/stylesheets/breakpoint';
+$high-tide: 350px;
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+element.style {
+  height: 100% !important;
+}
+
+.card-body:hover {
+  cursor: pointer;
+  background-color: #6be892;
+  color: inherit;
+}
+
+.datumCard {
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+.card-title {
+  font-size: 1rem;
+}
+.selectStyle {
+  width: 90%;
+}
+
+.cardStyle {
+  width: 95%;
+  height: 25vh;
+  @include breakpoint($high-tide) {
+    width: 40%;
+    height: 17vh;
+  }
+
+}
+// @mixin breakpoint {
+//   @media (max-width:350) {
+//     background-color: red;
+//   }
+// }

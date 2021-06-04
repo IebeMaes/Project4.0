@@ -1,0 +1,65 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size = "medium" color="#81bb26" type="square-jelly-box" [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<h3>Users <span class="float-right"><fa-icon [icon]="faPlusSquare" size="2x" class="text-center pt-2" (click)= "goUserForm('new')"></fa-icon></span></h3>
+
+<!-- <div *ngFor="let user of users | async">
+    {{user.firstName}}
+</div> -->
+<label for="exampleInputEmail1" class="form-label">Search a user:</label>
+<input type="text" class="form-control" [(ngModel)]="term" >
+<accordion [isAnimated]="true" [closeOthers]="true">
+    <accordion-group id="test" *ngFor="let user of (users | async) | filter:term" [panelClass]="customClass" #accordionGroupRef>
+        <div accordion-heading>
+            {{user.firstName}} {{user.lastName}}
+            <span class="float-right">
+                <fa-icon *ngIf="!accordionGroupRef.isOpen" [icon]="faChevronDown" size="2x" class="text-center pt-2">
+                </fa-icon>
+                <fa-icon *ngIf="accordionGroupRef.isOpen" [icon]="faChevronUp" size="2x" class="text-center pt-2">
+                </fa-icon>
+            </span>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col">
+                     Firstname:  <span class="textStyle">{{user.firstName}}</span>
+                </div>
+                <div class="col">
+                    Lastname: <span class="textStyle">{{user.lastName}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    UserType: <span class="textStyle">{{user.userType.userTypeName}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    Email: <span class="textStyle">{{user.email}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    Address: <span class="textStyle">{{user.address}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                     PostalCode:  <span class="textStyle">{{user.postalCode}}</span>
+                </div>
+                <div class="col">
+                    City: <span class="textStyle">{{user.city}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                     <button class="btn btn-warning btn-block" (click)="goUserForm(user.userID)">Edit</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger btn-block" (click)="deleteUser(user.userID)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </accordion-group>
+</accordion>

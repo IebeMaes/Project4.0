@@ -1,0 +1,60 @@
+//override Bootstrap variables and custom mixins
+//@import "variables";
+
+$backLight : #6be892;
+$back1 : white;
+//reboot
+//@import "reboot";
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+@import '~ngx-toastr/toastr';
+@import '~ngx-toastr/toastr-bs4-alert';
+
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
+
+
+
+body {
+    color: #0C090A;
+    background-color: $back1;//#72E388;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: bolder;
+
+}
+
+h1, h2, h3, h4, h5, .highcharts-title, .highcharts-subtitle, .highcharts-legend-item{
+    color: #323031!important;//#156A26;
+    background-color: inherit;
+    font-family: 'Alegreya', serif;
+    font-weight: bolder;
+}
+
+//nobody is gonna know :p
+.highcharts-credits{
+    display:none;
+}
+
+.bg-light {
+    background-color:$back1!important;
+}
+
+.biotGreen {
+    background-color: #156a26;
+    color: white;
+  }
+
+.btn{
+background-color:#81bb26!important ;
+color:black!important;
+font-weight: bolder;
+  }
+
+//custom code/partials
+
+fa-icon {
+    color:#81bb26!important;
+}

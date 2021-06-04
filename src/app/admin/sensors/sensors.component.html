@@ -1,0 +1,44 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size = "medium" color="#81bb26" type="square-jelly-box" [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<h3>Sensors <span class="float-right"><fa-icon [icon]="faPlusSquare" size="2x" class="text-center pt-2" (click)= "goSensorForm('new')"></fa-icon></span></h3>
+
+<!-- <div *ngFor="let sensor of (sensors | async)">
+    {{sensor.name}}
+</div> -->
+<label class="form-label">Search a sensor:</label>
+<input type="text" class="form-control" [(ngModel)]="term" >
+<accordion [isAnimated]="true" [closeOthers]="true" class="pt-3">
+    <accordion-group id="test" *ngFor="let sensor of (sensors | async) | filter:term" [panelClass]="customClass" #accordionGroupRef>
+        <div accordion-heading>
+            {{sensor.name}}
+            <span class="float-right">
+                <fa-icon *ngIf="!accordionGroupRef.isOpen" [icon]="faChevronDown" size="2x" class="text-center pt-2">
+                </fa-icon>
+                <fa-icon *ngIf="accordionGroupRef.isOpen" [icon]="faChevronUp" size="2x" class="text-center pt-2">
+                </fa-icon>
+            </span>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col">
+                     Sensor name:  <span class="textStyle">{{sensor.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    SensorType: <span class="textStyle">{{sensor.sensorType.name}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                     <button class="btn btn-warning btn-block" (click)="goSensorForm(sensor.sensorID)">Edit</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger btn-block" (click)="deleteSensor(sensor.sensorID)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </accordion-group>
+</accordion>

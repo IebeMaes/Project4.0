@@ -1,0 +1,141 @@
+<!-- <p>chart</p> -->
+<!-- <button (click)="testTest()">test</button> -->
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size = "medium" color="#81bb26" type="square-jelly-box" [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner> 
+
+
+
+<div id="container2" style="width: 95%;" class="mb-1">
+</div>
+<div class="mb-5" style="text-align: right;">
+  <!-- keuze uit grafiekweergave -->
+  <label  for="SelectGraphType"><fa-icon [icon]="faEye" class="closingX" size="1x" style="color: #323031!important;"></fa-icon>&nbsp;</label>
+  <select  [(ngModel)]="selectedGraphType"
+    (change)="changeGraphType()" id="SelectGraphType">
+    <option *ngFor="let type of graphTypes" [ngValue]=type>
+      <!-- wilt niet lukken: icon in dropdown!! -->
+      <!-- <fa-icon *ngIf="type==='scatter'" [icon]="faEye" class="closingX" size="1x">i</fa-icon> -->
+      <span *ngIf="type==='scatter'">&#Xf2a1;</span>
+      <!-- <i *ngIf="type==='scatter'" class="fa fa-line-chart"></i> -->
+      <span *ngIf="type==='line'">&#Xf201;</span>
+      <span *ngIf="type==='bar'">&#Xf080;</span>
+      <!-- {{ type | titlecase }} -->
+    </option>
+  </select>
+</div>
+
+
+<div *ngIf="averageBool" class="row">
+  <table class="table mx-auto table-bordered">
+    <title>Measurements</title>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col"><span style="text-align:left!important;" (click)="showAverage()">
+            <fa-icon [icon]="faWindowClose" class="closingX" size="2x"></fa-icon>
+          </span></th>
+        <th scope="col">Day</th>
+        <th scope="col">Night</th>
+        <th scope="col">Combined</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Total</th>
+        <td>{{dagCount}}</td>
+        <td>{{nachtCount}}</td>
+        <td>{{nachtCount + dagCount}}</td>
+      </tr>
+
+      <!-- average by selection.. -->
+      <tr>
+        <th scope="row">Last&nbsp;{{selectedDaysAverage}}&nbsp;days</th>
+        <td style="color: green;">{{gemiddeldeDag | number : '1.2-2'}} </td>
+        <td style="color: black;">{{gemiddeldeNacht | number : '1.2-2'}} </td>
+        <td style="color: blue;">{{gemiddelde | number : '1.2-2'}}</td>
+      </tr>
+    </tbody>
+
+    <!-- Selecting days for average -->
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <label *ngIf="averageBool" for="SelectAverageTime">Calculate average for last:&nbsp;&nbsp;</label>
+          <select *ngIf="averageBool" class="custom-select dropdown col-4" [(ngModel)]="selectedDaysAverage"
+            (change)="changeAverage()" id="SelectAverageTime">
+            <option *ngFor="let day of daysAverage" [ngValue]=day>{{day}}{{ (day == 1 ) ? ' day': ' days'}}</option>
+          </select>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>
+
+
+<div class="row mb-4">
+
+  <!-- tonen van de gemiddeldes, instellen tijdsspanne voor gemiddeldes, graphtype kiezen -->
+  <div class="col-6"> <button *ngIf="!averageBool" class="btn btn-block btn-info"
+      (click)="showAverage()">Show&nbsp;Averages</button>
+  </div>
+
+  <!-- aanpassen day en night start time -->
+  <div class="col-6">
+    <button *ngIf="!showdayNightSettings" class="btn-block btn btn-info"
+      (click)="changetimeSettings()">Set&nbsp;time</button>
+  </div>
+
+
+</div>
+
+
+
+<div *ngIf="showdayNightSettings" class="row">
+  <table class="table mx-auto table-bordered">
+    <title>Measurements</title>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col"><span (click)="changetimeSettings()">
+            <fa-icon [icon]="faWindowClose" class="closingX" size="2x"></fa-icon>
+          </span></th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Day</th>
+        <td colspan="2"><select class="mr-5 custom-select dropdown col-3" [(ngModel)]="dagUur"
+            (change)='changeDayNightTime()'>
+            <option *ngFor="let hour of hours" [ngValue]=hour>{{hour}}</option>
+          </select>
+          <fa-icon [icon]="faArrowRight" size="1x"></fa-icon>
+          <select class="ml-5 custom-select dropdown col-3" [(ngModel)]="nachtUur" (change)='changeDayNightTime()'>
+            <option *ngFor="let hour of hours" [ngValue]=hour>{{hour}}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <th scope="row">Night</th>
+        <td colspan="2"><select class="mr-5 custom-select dropdown col-3" [(ngModel)]="nachtUur"
+            (change)='changeDayNightTime()'>
+            <option *ngFor="let hour of hours" [ngValue]=hour>{{hour}}</option>
+          </select>
+          <fa-icon [icon]="faArrowRight" size="1x"></fa-icon>
+          <select class="ml-5 custom-select dropdown col-3" [(ngModel)]="dagUur" (change)='changeDayNightTime()'>
+            <option *ngFor="let hour of hours" [ngValue]=hour>{{hour}}</option>
+          </select>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

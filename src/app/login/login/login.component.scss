@@ -1,0 +1,19 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding:8px;
+  display:block;
+  border:none;
+  outline: none;
+  border-radius: 0%;
+  border-bottom:1px solid #156A26;width:100%
+}
+
+.biotGreen{
+  background-color: #156A26;
+  color: white;
+}

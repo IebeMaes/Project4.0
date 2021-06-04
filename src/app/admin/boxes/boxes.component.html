@@ -1,0 +1,84 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#81bb26" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<h3>Boxes <span class="float-right">
+    <fa-icon [icon]="faPlusSquare" size="2x" class="text-center pt-2" (click)="goBoxForm('new')"></fa-icon>
+  </span></h3>
+
+<!-- <div *ngFor="let user of users | async">
+    {{user.firstName}}
+</div> -->
+
+<label for="exampleInputEmail1" class="form-label">Search a box:</label>
+<input type="text" class="form-control" [(ngModel)]="term">
+
+
+<accordion [isAnimated]="true" [closeOthers]="true">
+  <accordion-group id="test" *ngFor="let box of boxesArray | filter:term" [panelClass]="customClass"
+    #accordionGroupRef>
+    <div accordion-heading>
+      {{box.name}}
+      <span class="float-right">
+        <fa-icon *ngIf="!accordionGroupRef.isOpen" [icon]="faChevronDown" size="2x" class="text-center pt-2" [ngClass]="{'inactive': !box.active}">
+        </fa-icon>
+        <fa-icon *ngIf="accordionGroupRef.isOpen" [icon]="faChevronUp" size="2x" class="text-center pt-2" [ngClass]="{'inactive': !box.active}">
+        </fa-icon>
+      </span>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col">
+          Name: <span class="textStyle">{{box.name}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Mac address: <span class="textStyle">{{box.macAddress}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" *ngIf="box.owner">
+          Owner: <span class="textStyle">{{box.owner.user.firstName}} {{box.owner.user.lastName}}</span>
+          <!-- Owner: <span *ngIf="box.boxUsers" class="textStyle">{{box.boxUsers[0].userID}}</span> -->
+        </div>
+        <div class="col" *ngIf="!box.owner">
+          Owner: <span class="textStyle">No owner available</span>
+          <!-- Owner: <span *ngIf="box.boxUsers" class="textStyle">{{box.boxUsers[0].userID}}</span> -->
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col" *ngIf="box.sensorBoxes[0]">
+          Sensors in this box: <br>
+          <ul>
+            <li *ngFor="let sb of box.sensorBoxes" class="textStyle">{{sb.sensor.name}}</li>
+          </ul>
+        </div>
+        <div class="col" *ngIf="!box.sensorBoxes[0]">
+          Sensors in this box: <span class="textStyle">No sensors available</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Active: <span class="textStyle">{{box.active}}</span>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Comment: <span *ngIf="box.comment" class="textStyle">{{box.comment}}</span>
+          <span *ngIf="!box.comment" class="textStyle">No comment available</span>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col">
+          <button class="btn btn-warning btn-block" (click)="goBoxEditForm(box.boxID)">Edit</button>
+        </div>
+        <div class="col">
+          <button *ngIf="box.active" class="btn btn-danger btn-block" (click)="setInactive(box)">Set inactive</button>
+          <button *ngIf="!box.active" class="btn btn-danger btn-block" (click)="setActive(box)">Set active</button>
+        </div>
+      </div>
+    </div>
+  </accordion-group>
+</accordion>

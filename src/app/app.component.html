@@ -1,0 +1,63 @@
+<div class="container">
+  <div *ngIf="isLoggedIn">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><img src="../assets/Logo.png" class="img-fluid logo" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <!-- Routes for the user -->
+        <ul class="navbar-nav" *ngIf="currentUser.userType.userTypeName==='Boer'">
+
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Profile</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" (click)="logout()" routerLink="/login" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Logout </a>
+          </li>
+        </ul>
+
+        <!-- Routes for the Admin -->
+        <ul class="navbar-nav" *ngIf="currentUser.userType.userTypeName==='Admin'">
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/admin/home" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Home</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/admin/users" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Users</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/admin/boxes" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Boxes</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" routerLink="/admin/sensors" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Sensors</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+            <a class="nav-link" (click)="logout()">Logout </a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+    <hr>
+  </div>
+
+
+
+  <router-outlet>
+
+  </router-outlet>
+
+
+</div>
